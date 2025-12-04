@@ -36,6 +36,11 @@ class Utilisateur
 
     #[ORM\Column(length: 255)]
     private ?string $derniere_connexion = null;
+	
+	public function __toString(): string
+	{
+	return $this->id_utilisateur.' '.$this->nom_user;
+	}
 
     public function getId(): ?int
     {

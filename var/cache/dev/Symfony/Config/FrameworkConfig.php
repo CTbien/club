@@ -313,7 +313,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Form configuration
-     * @default {"enabled":false,"csrf_protection":{"enabled":null,"token_id":null,"field_name":"_token","field_attr":{"data-controller":"csrf-protection"}}}
+     * @default {"enabled":true,"csrf_protection":{"enabled":null,"token_id":null,"field_name":"_token","field_attr":{"data-controller":"csrf-protection"}}}
     */
     public function form(array $value = []): \Symfony\Config\Framework\FormConfig
     {
@@ -483,7 +483,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Assets configuration
-     * @default {"enabled":false,"strict_mode":false,"version_strategy":null,"version":null,"version_format":"%%s?%%s","json_manifest_path":null,"base_path":"","base_urls":[],"packages":[]}
+     * @default {"enabled":true,"strict_mode":false,"version_strategy":null,"version":null,"version_format":"%%s?%%s","json_manifest_path":null,"base_path":"","base_urls":[],"packages":[]}
     */
     public function assets(array $value = []): \Symfony\Config\Framework\AssetsConfig
     {
@@ -515,7 +515,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Translator configuration
-     * @default {"enabled":false,"fallbacks":[],"logging":false,"formatter":"translator.formatter.default","cache_dir":"%kernel.cache_dir%\/translations","default_path":"%kernel.project_dir%\/translations","paths":[],"pseudo_localization":{"enabled":false,"accents":true,"expansion_factor":1,"brackets":true,"parse_html":false,"localizable_html_attributes":[]},"providers":[],"globals":[]}
+     * @default {"enabled":true,"fallbacks":[],"logging":false,"formatter":"translator.formatter.default","cache_dir":"%kernel.cache_dir%\/translations","default_path":"%kernel.project_dir%\/translations","paths":[],"pseudo_localization":{"enabled":false,"accents":true,"expansion_factor":1,"brackets":true,"parse_html":false,"localizable_html_attributes":[]},"providers":[],"globals":[]}
     */
     public function translator(array $value = []): \Symfony\Config\Framework\TranslatorConfig
     {
@@ -531,7 +531,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Validation configuration
-     * @default {"enabled":false,"enable_attributes":true,"static_method":["loadValidatorMetadata"],"translation_domain":"validators","email_validation_mode":"html5","mapping":{"paths":[]},"not_compromised_password":{"enabled":true,"endpoint":null},"disable_translation":false,"auto_mapping":[]}
+     * @default {"enabled":true,"enable_attributes":true,"static_method":["loadValidatorMetadata"],"translation_domain":"validators","email_validation_mode":"html5","mapping":{"paths":[]},"not_compromised_password":{"enabled":true,"endpoint":null},"disable_translation":false,"auto_mapping":[]}
     */
     public function validation(array $value = []): \Symfony\Config\Framework\ValidationConfig
     {
@@ -578,7 +578,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Property access configuration
-     * @default {"enabled":false,"magic_call":false,"magic_get":true,"magic_set":true,"throw_exception_on_invalid_index":false,"throw_exception_on_invalid_property_path":true}
+     * @default {"enabled":true,"magic_call":false,"magic_get":true,"magic_set":true,"throw_exception_on_invalid_index":false,"throw_exception_on_invalid_property_path":true}
     */
     public function propertyAccess(array $value = []): \Symfony\Config\Framework\PropertyAccessConfig
     {
@@ -594,7 +594,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Type info configuration
-     * @default {"enabled":false}
+     * @default {"enabled":true}
     */
     public function typeInfo(array $value = []): \Symfony\Config\Framework\TypeInfoConfig
     {
@@ -610,7 +610,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Property info configuration
-     * @default {"enabled":false}
+     * @default {"enabled":true}
     */
     public function propertyInfo(array $value = []): \Symfony\Config\Framework\PropertyInfoConfig
     {
@@ -890,7 +890,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
     /**
      * Uid configuration
-     * @default {"enabled":false,"default_uuid_version":7,"name_based_uuid_version":5,"time_based_uuid_version":7}
+     * @default {"enabled":true,"default_uuid_version":7,"name_based_uuid_version":5,"time_based_uuid_version":7}
     */
     public function uid(array $value = []): \Symfony\Config\Framework\UidConfig
     {
@@ -1067,7 +1067,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('form', $value)) {
             $this->_usedProperties['form'] = true;
-            $this->form = \is_array($value['form']) ? new \Symfony\Config\Framework\FormConfig($value['form']) : $value['form'];
+            $this->form = new \Symfony\Config\Framework\FormConfig($value['form']);
             unset($value['form']);
         }
 
@@ -1127,7 +1127,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('assets', $value)) {
             $this->_usedProperties['assets'] = true;
-            $this->assets = \is_array($value['assets']) ? new \Symfony\Config\Framework\AssetsConfig($value['assets']) : $value['assets'];
+            $this->assets = new \Symfony\Config\Framework\AssetsConfig($value['assets']);
             unset($value['assets']);
         }
 
@@ -1139,13 +1139,13 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('translator', $value)) {
             $this->_usedProperties['translator'] = true;
-            $this->translator = \is_array($value['translator']) ? new \Symfony\Config\Framework\TranslatorConfig($value['translator']) : $value['translator'];
+            $this->translator = new \Symfony\Config\Framework\TranslatorConfig($value['translator']);
             unset($value['translator']);
         }
 
         if (array_key_exists('validation', $value)) {
             $this->_usedProperties['validation'] = true;
-            $this->validation = \is_array($value['validation']) ? new \Symfony\Config\Framework\ValidationConfig($value['validation']) : $value['validation'];
+            $this->validation = new \Symfony\Config\Framework\ValidationConfig($value['validation']);
             unset($value['validation']);
         }
 
@@ -1163,19 +1163,19 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('property_access', $value)) {
             $this->_usedProperties['propertyAccess'] = true;
-            $this->propertyAccess = \is_array($value['property_access']) ? new \Symfony\Config\Framework\PropertyAccessConfig($value['property_access']) : $value['property_access'];
+            $this->propertyAccess = new \Symfony\Config\Framework\PropertyAccessConfig($value['property_access']);
             unset($value['property_access']);
         }
 
         if (array_key_exists('type_info', $value)) {
             $this->_usedProperties['typeInfo'] = true;
-            $this->typeInfo = \is_array($value['type_info']) ? new \Symfony\Config\Framework\TypeInfoConfig($value['type_info']) : $value['type_info'];
+            $this->typeInfo = new \Symfony\Config\Framework\TypeInfoConfig($value['type_info']);
             unset($value['type_info']);
         }
 
         if (array_key_exists('property_info', $value)) {
             $this->_usedProperties['propertyInfo'] = true;
-            $this->propertyInfo = \is_array($value['property_info']) ? new \Symfony\Config\Framework\PropertyInfoConfig($value['property_info']) : $value['property_info'];
+            $this->propertyInfo = new \Symfony\Config\Framework\PropertyInfoConfig($value['property_info']);
             unset($value['property_info']);
         }
 
@@ -1265,7 +1265,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
 
         if (array_key_exists('uid', $value)) {
             $this->_usedProperties['uid'] = true;
-            $this->uid = \is_array($value['uid']) ? new \Symfony\Config\Framework\UidConfig($value['uid']) : $value['uid'];
+            $this->uid = new \Symfony\Config\Framework\UidConfig($value['uid']);
             unset($value['uid']);
         }
 
@@ -1347,7 +1347,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['csrf_protection'] = $this->csrfProtection->toArray();
         }
         if (isset($this->_usedProperties['form'])) {
-            $output['form'] = $this->form instanceof \Symfony\Config\Framework\FormConfig ? $this->form->toArray() : $this->form;
+            $output['form'] = $this->form->toArray();
         }
         if (isset($this->_usedProperties['httpCache'])) {
             $output['http_cache'] = $this->httpCache instanceof \Symfony\Config\Framework\HttpCacheConfig ? $this->httpCache->toArray() : $this->httpCache;
@@ -1377,16 +1377,16 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['request'] = $this->request instanceof \Symfony\Config\Framework\RequestConfig ? $this->request->toArray() : $this->request;
         }
         if (isset($this->_usedProperties['assets'])) {
-            $output['assets'] = $this->assets instanceof \Symfony\Config\Framework\AssetsConfig ? $this->assets->toArray() : $this->assets;
+            $output['assets'] = $this->assets->toArray();
         }
         if (isset($this->_usedProperties['assetMapper'])) {
             $output['asset_mapper'] = $this->assetMapper instanceof \Symfony\Config\Framework\AssetMapperConfig ? $this->assetMapper->toArray() : $this->assetMapper;
         }
         if (isset($this->_usedProperties['translator'])) {
-            $output['translator'] = $this->translator instanceof \Symfony\Config\Framework\TranslatorConfig ? $this->translator->toArray() : $this->translator;
+            $output['translator'] = $this->translator->toArray();
         }
         if (isset($this->_usedProperties['validation'])) {
-            $output['validation'] = $this->validation instanceof \Symfony\Config\Framework\ValidationConfig ? $this->validation->toArray() : $this->validation;
+            $output['validation'] = $this->validation->toArray();
         }
         if (isset($this->_usedProperties['annotations'])) {
             $output['annotations'] = $this->annotations instanceof \Symfony\Config\Framework\AnnotationsConfig ? $this->annotations->toArray() : $this->annotations;
@@ -1395,13 +1395,13 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['serializer'] = $this->serializer instanceof \Symfony\Config\Framework\SerializerConfig ? $this->serializer->toArray() : $this->serializer;
         }
         if (isset($this->_usedProperties['propertyAccess'])) {
-            $output['property_access'] = $this->propertyAccess instanceof \Symfony\Config\Framework\PropertyAccessConfig ? $this->propertyAccess->toArray() : $this->propertyAccess;
+            $output['property_access'] = $this->propertyAccess->toArray();
         }
         if (isset($this->_usedProperties['typeInfo'])) {
-            $output['type_info'] = $this->typeInfo instanceof \Symfony\Config\Framework\TypeInfoConfig ? $this->typeInfo->toArray() : $this->typeInfo;
+            $output['type_info'] = $this->typeInfo->toArray();
         }
         if (isset($this->_usedProperties['propertyInfo'])) {
-            $output['property_info'] = $this->propertyInfo instanceof \Symfony\Config\Framework\PropertyInfoConfig ? $this->propertyInfo->toArray() : $this->propertyInfo;
+            $output['property_info'] = $this->propertyInfo->toArray();
         }
         if (isset($this->_usedProperties['cache'])) {
             $output['cache'] = $this->cache->toArray();
@@ -1446,7 +1446,7 @@ class FrameworkConfig implements \Symfony\Component\Config\Builder\ConfigBuilder
             $output['rate_limiter'] = $this->rateLimiter instanceof \Symfony\Config\Framework\RateLimiterConfig ? $this->rateLimiter->toArray() : $this->rateLimiter;
         }
         if (isset($this->_usedProperties['uid'])) {
-            $output['uid'] = $this->uid instanceof \Symfony\Config\Framework\UidConfig ? $this->uid->toArray() : $this->uid;
+            $output['uid'] = $this->uid->toArray();
         }
         if (isset($this->_usedProperties['htmlSanitizer'])) {
             $output['html_sanitizer'] = $this->htmlSanitizer instanceof \Symfony\Config\Framework\HtmlSanitizerConfig ? $this->htmlSanitizer->toArray() : $this->htmlSanitizer;
