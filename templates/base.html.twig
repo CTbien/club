@@ -2,15 +2,54 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <title>{% block title %}Mon Club de Sport{% endblock %}</title>
+        <link rel="icon" href="...">
+        
+        {# Ajout de Bootstrap pour avoir un site joli rapidement #}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        {% block javascripts %}
-        {% endblock %}
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <li class="nav-item">
+        <a class="nav-link" href="{{ path('app_dashboard') }}">Mon Tableau de Bord</a>
+        </li>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">MonClub</a>
+                
+                <div class="collapse navbar-collapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/">Accueil</a></li>
+                    </ul>
+
+                    <div class="d-flex shadow-sm">
+                        {% if app.user %}
+                            {# Si l'utilisateur est connecté #}
+                            <span class="navbar-text me-3 text-white">
+                                👤 {{ app.user.prenomUser }} {{ app.user.nomUser }}
+                            </span>
+                            
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('admin') }}" class="btn btn-outline-warning btn-sm me-2">Admin</a>
+                            {% endif %}
+
+                            <a href="{{ path('app_logout') }}" class="btn btn-danger btn-sm">Déconnexion</a>
+                        {% else %}
+                            {# Si l'utilisateur est anonyme #}
+                            <a href="{{ path('app_login') }}" class="btn btn-outline-light btn-sm me-2">Connexion</a>
+                            <a href="{{ path('app_register') }}" class="btn btn-primary btn-sm">S'inscrire</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
